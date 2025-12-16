@@ -1,14 +1,45 @@
-const { createElement } = require("react")
 
-const btn = document.getElementById('button')
+const btn = document.getElementById('btn')
 
 const custumAlert = (message) => {
     // alert(message)
-    const overlay = document.createElement('div')
+    const overlay = document.createElement('div');
     overlay.className = 'overlay';
+    document.body.append(overlay);
+
+    const contentDiv = document.createElement('div');
+    contentDiv.className = 'content';
+    overlay.append(contentDiv);
+
+
+    const messageH1 = document.createElement('h1');
+    messageH1.textContent = message;
+    contentDiv.append(messageH1);
+
+    const closeButton = document.createElement('button');
+    closeButton.className = 'closeBtn';
+    closeButton.textContent = 'Got it';
+    contentDiv.append(closeButton);
     
-    document.append(overlay);
+    closeButton.addEventListener('click', () => {
+        overlay.remove();
+    });
+
+    overlay.addEventListener('click', (event) => {
+        if (event.target.className === 'overlay') {
+            overlay.remove();
+        }
+    });
 }
+
 btn.addEventListener('click', () => {
-    CustomEvent('Learn frontend')
+    custumAlert('Learn frontend')
+})
+
+button2.addEventListener('click', () => {
+    custumAlert('delai domashq')
+})
+
+button3.addEventListener('click', () => {
+    custumAlert('Gasi lico')
 })
